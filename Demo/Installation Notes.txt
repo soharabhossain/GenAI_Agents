@@ -5,8 +5,10 @@ python -m venv agents
 agents/Scripts/activate
 
 ## Install the Dependencies
-
 pip install -r requirements.txt
+
+# Create a file `.env` and save all the secret API keys inside it.
+
 
 
 
