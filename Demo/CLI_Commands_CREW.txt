@@ -1,0 +1,19 @@
+---------------------------------
+# CLI Commands for creating CREWs
+---------------------------------
+## Create Crew
+ # crewai create crew mycrew
+
+Change the directory: 
+#cd mycrew
+
+## Install dependencies
+ # crewai install
+
+## activate the virtual environment
+
+## Add the `.env` file with all the secret API keys
+
+## Execute the Crew
+ # crewai run
+
