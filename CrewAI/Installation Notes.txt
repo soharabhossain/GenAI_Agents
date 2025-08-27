@@ -1,0 +1,15 @@
+## Create Virtual Environment
+python -m venv agents
+
+## Activate the Virtual Environment
+agents/Scripts/activate
+
+## Install the Dependencies
+pip install -r requirements.txt
+
+# Create a file `.env` and save all the secret API keys inside it.
+
+
+
+
+

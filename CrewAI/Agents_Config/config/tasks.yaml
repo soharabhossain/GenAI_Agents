@@ -1,0 +1,11 @@
+research_task:
+  description: >
+    Use the search tool to collect the latest insights on the given topic {topic}, including key facts, statistics, and URLs.
+  expected_output: >
+    Bullet points of up-to-date research notes.
+
+writing_task:
+  description: >
+    Based on the research notes, write a 200-word blog post summarizing the findings.
+  expected_output: >
+    A concise blog post.

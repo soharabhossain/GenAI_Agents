@@ -1,0 +1,80 @@
+---------------------------------------------------------------
+# Example Template Flows 
+A Flow running multiple Crews  + Context sharing between Crews
+---------------------------------------------------------------
+
+In this example we create 2 crews inside a Flow:
+> ResearchCrew (actual definition is not shown)
+> ContentCrew (actual definition is not shown)
+
+# --------------- src/state.py -----------------------
+# If you wish to define a structured state
+
+from pydantic import BaseModel, Field
+
+class BlogState(BaseModel):
+    topic: str = Field(..., description="The topic to research and write about.")
+    research_summary: str = Field(default="", description="The summary of research findings.")
+    blog_article: str = Field(default="", description="The final blog article.")
+
+# --------------- crews/research_crew.py -----------------------
+Define and return ResearchCrew
+i. You should update the `agents.yaml` and `tasks.yaml` files of the crews to define your agents and tasks respectively (depends on the particular problem being solved).
+
+ii. The script `research_crew.py` should hold the definition of the ResearchCrew. We later import it in the `main.py` file (below) 
+
+# --------------- crews/content_crew.py -----------------------
+Define and return ContentCrew
+
+Define and return ContentCrew
+i. You should update the `agents.yaml` and `tasks.yaml` files of the crews to define your agents and tasks respectively (depends on the particular problem being solved).
+
+ii. The script `content_crew.py` should hold the definition of the ContentCrew. We later import it in the `main.py` file (below) 
+
+
+#------------------------------------------------
+# --------------- main.py -----------------------
+#------------------------------------------------
+from crewai.flow import Flow, start, listen
+from crews.research_crew import ResearchCrew # <-- importing the ResearchCrew
+from crews.content_crew import ContentCrew   # <-- importing the ContentCrew
+from src.state import BlogState              # <-- importing the structured state
+
+# Build the Flow
+class BlogCreationFlow(Flow[BlogState]):
+    """Orchestrates research and content creation."""
+
+    @start()
+    def get_topic(self) -> None:
+        """Initializes the flow with user input."""
+        topic = input("Enter a topic for the blog post: ")
+        self.state.topic = topic
+
+    @listen(get_topic)
+    def run_research_crew(self) -> str:
+        """Executes the research crew and saves the output to state."""
+        research_crew = ResearchCrew(state=self.state)
+        research_summary = research_crew.kickoff()
+        self.state.research_summary = research_summary
+        return research_summary
+
+    @listen(run_research_crew)
+    def run_content_crew(self, research_summary: str) -> None:
+        """Executes the content crew using the research summary from the state."""
+        content_crew = ContentCrew(state=self.state)
+        blog_article = content_crew.kickoff()
+        self.state.blog_article = blog_article
+    
+    def print_result(self):
+        """Prints the final blog article from the flow's state."""
+        print("\n--- FINAL BLOG ARTICLE ---\n")
+        print(self.state.blog_article)
+
+if __name__ == "__main__":
+    flow = BlogCreationFlow()
+    flow.kickoff()
+    flow.print_result()
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
