@@ -1,0 +1,57 @@
+--------------------------------
+# FLOW (Event-driven Processing)
+--------------------------------
+# Benefits:
+> Simplified Workflow Creation 
+> State Management
+> Event-Driven Architecture
+> Flexible Control Flow
+
+# Flow (Sequential or Parallel processing)
+ > @start() decorator
+ > @listen() decorator
+
+# State Management
+ > Unstructured
+ > Structured
+
+# State Persistance with @persist decorator
+ > Class level
+ > Method level
+
+# Conditional Control
+ > or_() function
+ > and_() function
+ > @router decorator for conditional routing
+
+# Adding Agents to Flow
+
+# Creating Flows with Crews (with CLI Commands)
+------------------------------------------------------------------
+# CLI - Commands for creating FLOWS
+# Create a Project Scaffolding with a Demo Flow & Crew (PoemCrew)
+------------------------------------------------------------------
+
+Create the flow with the first crew: 
+# crewai create flow flow_demo
+
+Change the directory: 
+ # cd flow_demo
+
+## Install dependencies
+ # crewai install
+
+## activate the virtual environment
+ # .venv/Scripts/activate
+
+## Add the `.env` file with all the secret API keys
+
+## Execute the Flow
+ # crewai run
+Alternatively
+ # crewai flow kickoff
+
+Add a second crew to the existing flow: 
+# crewai flow add-crew my_second_crew
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
