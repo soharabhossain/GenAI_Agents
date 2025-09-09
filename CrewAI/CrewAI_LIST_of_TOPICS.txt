@@ -1,0 +1,134 @@
+--------
+# CrewAI
+--------
+# AGENT, TASK, CREW
+# FOCUS (individual agent, each expert in one task) vs. COOPERATE
+# COLLABORATION - PROCESS (Sequential, Hierarchical) (Passing context)
+# MEMORY
+# KNOWLEDGE 
+# TOOL (Built-in & Custom Tool)
+# REASONING
+# PLANNING
+# CALLBACK
+# STRUCTURED OUTPUT
+# CODE EXECUTION
+# ASYNC EXECUTION
+# CACHING
+# Tokens/Cost Estimation
+
++++++++++++++++++++++++++++++++++
+# CLI Commands for creating CREWs
+---------------------------------
+## Create Crew
+ # crewai create crew mycrew
+
+Change the directory: 
+#cd mycrew
+
+## Install dependencies
+ # crewai install
+
+## activate the virtual environment
+ # .venv/Scripts/activate
+
+## Add the `.env` file with all the secret API keys
+
+## Execute the Crew
+ # crewai run
+
+## Deploy the Crew 
+ # crewai deploy
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+--------------------------------
+# FLOW (Event-driven Processing)
+--------------------------------
+# Benefits:
+> Simplified Workflow Creation 
+> State Management
+> Event-Driven Architecture
+> Flexible Control Flow
+
+
+# Flow (Sequential or Parallel processing)
+ > @start() decorator
+ > @listen() decorator
+
+# State Management
+ > Unstructured
+ > Structured
+
+# State Persistance with @persist decorator
+ > Class level
+ > Method level
+
+# Conditional Control
+ > or_() function
+ > and_() function
+ > @router decorator for conditional routing
+
+# Adding Agents to Flow
+
+# Creating Flows with Crews (with CLI Commands)
+------------------------------------------------------------------
+# CLI Commands for creating FLOWS
+# Create a Project Scaffolding with a Demo Flow & Crew (PoemCrew)
+------------------------------------------------------------------
+
+Create the flow with the first crew: 
+# crewai create flow flow_demo
+
+Change the directory: 
+ # cd flow_demo
+
+## Install dependencies
+ # crewai install
+
+## activate the virtual environment
+ # .venv/Scripts/activate
+
+## Add the `.env` file with all the secret API keys
+
+## Execute the Flow
+ # crewai run
+Alternatively
+ # crewai flow kickoff
+
+Add a second crew to the existing flow: 
+# crewai flow add-crew my_second_crew
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+---------------------------------------
+# TRAIN/TEST (Performance Optimization)
+---------------------------------------
+TRAIN
+Run the following command and provide feedback when asked for
+Training data and trained agents data are stored in local pkl files
+
+# crewai train -n 2  
+-------------------------------------------------------
+TEST
+Run the following command to run the test for thrice
+Summary report is generated at the end
+By default the "gpt-4o-mini" will be used as the LLM for scoring the runs. Override the LLM by using the -m option
+
+# crewai test -n 3 -m groq/gemma2-9b-it
+
+---------------------------------------------------------
+REPLAY
+Replaying from a Specific Task for a Crew using the CLI
+# crewai log-tasks-outputs
+# crewai replay -t <task_id>
+
+---------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# EVENT LISTENERS
+CrewAI provides a powerful event system that allows you to listen for and react to various events that occur during the execution of your Crew. 
+ > custom integrations and monitoring
+
+
+# MCP (MODEL CONTEXT PROTOCOL)
+> Agent to Tool communication
+
