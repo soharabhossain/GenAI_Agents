@@ -1,0 +1,93 @@
+
+# DEMO-1: Our First ADK Agent with Tools
+# This example demonstrates how to create a simple agent using the ADK
+# that can answer questions about the time and weather in a city.
+# Using LLMs other than Gemini models
+
+import datetime
+from zoneinfo import ZoneInfo
+from google.adk.agents import LlmAgent
+
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+# Ensure your GROQ_API_KEY is set in your environment variables
+if not os.getenv("GROQ_API_KEY"):
+    raise ValueError("GROQ_API_KEY environment variable is not set.")
+
+from google.adk.models.lite_llm import LiteLlm
+groq_model = LiteLlm(model="groq/gemma2-9b-it")
+# gemini_model = LiteLlm(model="gemini-2.0-flash")
+
+
+
+def get_weather(city: str) -> dict:
+    """Retrieves the current weather report for a specified city.
+
+    Args:
+        city (str): The name of the city for which to retrieve the weather report.
+
+    Returns:
+        dict: status and result or error msg.
+    """
+    if city.lower() == "new york":
+        return {
+            "status": "success",
+            "report": (
+                "The weather in New York is sunny with a temperature of 25 degrees"
+                " Celsius (77 degrees Fahrenheit)."
+            ),
+        }
+    else:
+        return {
+            "status": "error",
+            "error_message": f"Weather information for '{city}' is not available.",
+        }
+
+
+def get_current_time(city: str) -> dict:
+    """Returns the current time in a specified city.
+
+    Args:
+        city (str): The name of the city for which to retrieve the current time.
+
+    Returns:
+        dict: status and result or error msg.
+    """
+
+    if city.lower() == "new york":
+        tz_identifier = "America/New_York"
+    else:
+        return {
+            "status": "error",
+            "error_message": (
+                f"Sorry, I don't have timezone information for {city}."
+            ),
+        }
+
+    tz = ZoneInfo(tz_identifier)
+    now = datetime.datetime.now(tz)
+    report = (
+        f'The current time in {city} is {now.strftime("%Y-%m-%d %H:%M:%S %Z%z")}'
+    )
+    return {"status": "success", "report": report}
+
+#=============================================================================
+# Define the root agent with tools
+root_agent = LlmAgent(
+    name="weather_time_agent",
+    # model="gemini-2.0-flash",
+    # model="groq/gemma2-9b-it",
+    model=groq_model,
+    
+    description=(
+        "Agent to answer questions about the time and weather in a city."
+    ),
+    instruction=(
+        "You are a helpful agent who can answer user questions about the time and weather in a city."
+    ),
+    tools=[get_weather, get_current_time],
+)
+
+#=============================================================================
