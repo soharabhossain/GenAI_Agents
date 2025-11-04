@@ -1,0 +1,21 @@
+Navigate to the parent A2A folder
+
+Open a terminal, activate the virtual env.
+
+Run the following command to run the remote agent:
+
+# adk api_server --a2a --port 8001 ./a2a_fact_checker
+
+
+Open a new terminal, activate the virtual env.
+
+run `adk web` command to run the local agent (root_agent)
+
+# adk web
+
+In the web UI provide your query.
+
+Tell me an interesting fact about the Jaipur.
+An interesting fact about Charlie Chaplin.
+
+
