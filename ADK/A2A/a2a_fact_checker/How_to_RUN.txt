@@ -15,7 +15,8 @@ run `adk web` command to run the local agent (root_agent)
 
 In the web UI provide your query.
 
-Tell me an interesting fact about the Jaipur.
+Tell me an interesting fact about Jaipur.
 An interesting fact about Charlie Chaplin.
+
 
 
