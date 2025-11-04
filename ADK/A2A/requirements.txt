@@ -1,0 +1,2 @@
+google-adk[a2a]
+python-a2a
